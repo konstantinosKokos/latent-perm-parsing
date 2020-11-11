@@ -5,15 +5,14 @@ import torch
 from torch import Tensor, LongTensor
 from torch.nn import Module, Dropout
 from torch.nn.utils.rnn import pad_sequence as _pad_sequence
-from transformers import BertTokenizer
+from transformers import RobertaTokenizer
 
 from Parser.data.sample import Sample, strs, ints, Matrix
 
 
 class Tokenizer(object):
     def __init__(self):
-        self.core = BertTokenizer.from_pretrained('wietsedv/bert-base-dutch-cased')
-        # self.core = RobertaTokenizer.from_pretrained("pdelobelle/robBERT-base")
+        self.core = RobertaTokenizer.from_pretrained("pdelobelle/robbert-v2-dutch-base")
 
     def encode_sample(self, sample: Sample) -> ints:
         return self.core.encode(' '.join(sample.words))
